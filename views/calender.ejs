@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Calender</title>
+</head>
+<body>
+
+<h1><%=title%></h1>
+<p>Welcome <%=user%></p>
+
+<a href="/showEvents"><h4>Upcoming Events</h4></a>
+
+
+
+<h1>Create Event</h1>
+<form action="/createEvent" method="POST">
+    <label for="fname">Attendee's Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="fname">Title</label><br>
+    <input type="text" id="title" name="title"><br>
+    <label for="lname">Summary</label><br>
+    <textarea type="text" id="body" name="body"></textarea><br>
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
