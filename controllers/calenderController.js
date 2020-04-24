@@ -3,14 +3,15 @@ const {google} = require('googleapis');
 const {OAuth2} = google.auth;
 const fs = require('fs');
 const path = require('path');
+const env = require('../config/environment');
 
 //Base directory 
 const baseDir = path.join(__dirname,'../.data');
 
 // setting up CLIENT_ID and SECRET_KEY
 const oauth2Client = new OAuth2(
-    "93467824609-nhn3ar82nuss68dlcr2nsioc3nvatjtv.apps.googleusercontent.com",
-    "xKs4ZlEH3mtT2YFIzNa3JK1Z",
+    env.google.clientID,
+    env.google.clientSecret
 );
 
 

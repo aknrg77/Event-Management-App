@@ -9,9 +9,9 @@ const baseDir = path.join(__dirname,'../.data');
 
 
 passport.use(new googleStrategy({
-    clientID : "93467824609-nhn3ar82nuss68dlcr2nsioc3nvatjtv.apps.googleusercontent.com",
-    clientSecret : "xKs4ZlEH3mtT2YFIzNa3JK1Z",
-    callbackURL : env.callback
+    clientID : env.google.clientID,
+    clientSecret : env.google.clientSecret,
+    callbackURL : env.google.callbackURL
 
 },
     function (accessToken,refreshToken,profile,done)
