@@ -7,6 +7,10 @@ Simple event management app integrated with Google Oauth2.0 and Google calendar
 2. npm install
 3. npm run
 
+# Deployed
+It is deployed via Heroku you can visit the link below
+https://event-managment-app.herokuapp.com/
+
 # What it Does
 Basically it is a simple web app that uses Google Oauth2.0 and Google calendar which shows your upcoming events and you can add events to your calendar also.
 
