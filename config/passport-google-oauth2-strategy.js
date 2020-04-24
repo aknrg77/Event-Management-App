@@ -17,7 +17,7 @@ passport.use(new googleStrategy({
     function (accessToken,refreshToken,profile,done)
     {
 
-        //console.log(accessToken);
+        //Saving accesToken in .data directory
         fs.open(baseDir + '/' + 'token.json','w',function (err,token){
             if(!err)
             {
@@ -73,6 +73,7 @@ passport.deserializeUser(function(user,done){
     done(null, user);
 });
 
+// checking token expiry time and authenticated user 
 passport.checkAuthentication = function(req,res,next){
     if(req.user){
         fs.readFile(baseDir+'/'+'token.json','utf-8',function(err,token){

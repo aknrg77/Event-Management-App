@@ -4,19 +4,19 @@ const {OAuth2} = google.auth;
 const fs = require('fs');
 const path = require('path');
 
+//Base directory 
 const baseDir = path.join(__dirname,'../.data');
 
+// setting up CLIENT_ID and SECRET_KEY
 const oauth2Client = new OAuth2(
     "93467824609-nhn3ar82nuss68dlcr2nsioc3nvatjtv.apps.googleusercontent.com",
     "xKs4ZlEH3mtT2YFIzNa3JK1Z",
 );
 
 
-
-
 module.exports.calenderPage = function(req,res){
 
-
+      //for reading token in .data directory
       token = fs.readFileSync(baseDir+'/'+'token.json','utf-8');
   
       creds = JSON.parse(token);
@@ -26,7 +26,7 @@ module.exports.calenderPage = function(req,res){
       });
 
     
-
+      //---Calendar--//
   const calendar = google.calendar({version: 'v3', auth:oauth2Client});
   calendar.events.list({
     calendarId: 'primary',
@@ -39,7 +39,7 @@ module.exports.calenderPage = function(req,res){
     const events = res.data.items;
     if (events.length) {
       
-      
+      //maping upcoming events
       events.map(function(event, i){
         b={
             start : event.start.dateTime || event.start.date,
@@ -56,7 +56,7 @@ module.exports.calenderPage = function(req,res){
       }
       myEvents.push(b);
     }
-
+    // saving events
     fs.open(baseDir + '/' + 'events.json','w',function (err,events){
       if(!err)
       {
@@ -97,11 +97,15 @@ module.exports.calenderPage = function(req,res){
 }
 
 module.exports.createEvent = function(req,res){
+
+  //--Calendar--//
     const calendar = google.calendar({version: 'v3', auth:oauth2Client});
+
+    //for now i have fixed a date for an event
     const startTime = new Date();
     startTime.setDate(startTime.getDay()+40);
 
-    const endTime = new Date();
+    const endTime = new Date(); 
     endTime.setDate(endTime.getDay()+40);
     endTime.setMinutes(endTime.getMinutes()+30);
 
@@ -118,10 +122,11 @@ module.exports.createEvent = function(req,res){
           },
         'attendees': [
           {'email': req.body.email}
-        ],
+        ]
       };
     
       calendar.events.insert({
+        sendUpdates: 'all',
         auth: oauth2Client,
         calendarId: 'primary',
         resource: event,
@@ -131,6 +136,7 @@ module.exports.createEvent = function(req,res){
           return;
         }
         else{
+          //event
           console.log(event);
 
         }
@@ -142,6 +148,7 @@ module.exports.createEvent = function(req,res){
 
 module.exports.showEvent = function(req,res){
 
+  //reading events
   events = fs.readFileSync(baseDir+'/'+'events.json','utf-8');
     res.send(JSON.parse(events));
 
