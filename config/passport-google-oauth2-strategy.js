@@ -2,7 +2,7 @@ const passport = require('passport');
 const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const fs = require('fs');
 const path = require('path');
-
+const env = require('./environment');
 
 
 const baseDir = path.join(__dirname,'../.data');
@@ -11,7 +11,7 @@ const baseDir = path.join(__dirname,'../.data');
 passport.use(new googleStrategy({
     clientID : "93467824609-nhn3ar82nuss68dlcr2nsioc3nvatjtv.apps.googleusercontent.com",
     clientSecret : "xKs4ZlEH3mtT2YFIzNa3JK1Z",
-    callbackURL : "http://localhost:3000/auth/google/callback"
+    callbackURL : env.callback
 
 },
     function (accessToken,refreshToken,profile,done)
