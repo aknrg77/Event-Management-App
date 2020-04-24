@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const bodyParser = require('body-Parser');
 const passport = require('passport');
 const googleStrategy = require('./config/passport-google-oauth2-strategy')
